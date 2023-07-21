@@ -15,8 +15,4 @@ class Category(models.Model):
         db_table = 'category'
 
     def __str__(self):
-<<<<<<< HEAD
         return f'{self.name}'
-=======
-        return f'{self.name}'
->>>>>>> origin/main
