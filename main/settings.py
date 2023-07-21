@@ -1,3 +1,4 @@
+import django_heroku
 import os
 from pathlib import Path
 
@@ -18,7 +19,7 @@ ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = "users.User"
 
-SECRET_ADMIN_KEY = '12345';
+SECRET_ADMIN_KEY = '12345'
 
 # Application definition
 
@@ -31,8 +32,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # APPS
+    'apps.categories.apps.CategoriesConfig',
     'apps.users.apps.UsersConfig',
+<<<<<<< HEAD
     'apps.chat.apps.ChatConfig',
+=======
+    'apps.main_page',
+    'apps.investor',
+>>>>>>> c24275b40e656caf4001047c25a57ce12b54876a
     # REST
     'rest_framework',
     'django_filters',
@@ -84,6 +91,18 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'expo_db',
+#        'USER': 'hit_expo',
+#        'PASSWORD': 'expo_123',
+#        'HOST': 'pgdb',
+#        'PORT': '5432',
+#    }
+# }
+
 
 
 REST_FRAMEWORK = {
@@ -152,3 +171,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+django_heroku.settings(locals())
+
