@@ -22,6 +22,7 @@ urlpatterns = [
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     # APPS
     path('', include('apps.users.urls')),
+    path('main_page/', include('apps.main_page.urls')),
 ] 
 
 urlpatterns += doc_urls

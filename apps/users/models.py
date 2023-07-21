@@ -232,7 +232,7 @@ class User(AbstractUser):
     objects = CustomManager()
 
     def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
+            update_fields=None):
         if not self.id:
             self.uniqueId = uuid.uuid4()
         super(User, self).save(force_insert=False, force_update=False, using=None, update_fields=None)

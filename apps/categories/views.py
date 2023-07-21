@@ -9,8 +9,8 @@ class CategoryList(generics.ListAPIView):
     queryset = Category.objects.filter(parent__isnull=True). \
         select_related('parent'). \
         prefetch_related('children',
-                         'children__children',
-                         'children__children__children')
+                        'children__children',
+                        'children__children__children')
     serializer_class = CategorySerializer
     filter_backends = [SearchFilter]
     search_fields = ['name']
@@ -18,5 +18,4 @@ class CategoryList(generics.ListAPIView):
 
 class CategoryRetrieve(generics.RetrieveAPIView):
     queryset = Category.objects.filter()
-
     serializer_class = CategorySerializer
