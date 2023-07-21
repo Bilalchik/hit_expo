@@ -20,9 +20,16 @@ class Investor(models.Model):
 class Country(models.Model):
     title = models.CharField(verbose_name='Название страны', max_length=300)
     image = models.ImageField(verbose_name='Фото флага', upload_to=get_upload_path)
-    description = models.TextField(verbose_name='Описание')
 
     class Meta:
         db_table = 'investor_country'
         verbose_name = 'Страна'
         verbose_name_plural = 'Страны'
+
+class Text(models.Model):
+    description = models.TextField(verbose_name='Описание сайта')
+
+    class Meta:
+        db_table = 'investor_text'
+        verbose_name = 'Описание'
+        verbose_name_plural = 'Описание'
