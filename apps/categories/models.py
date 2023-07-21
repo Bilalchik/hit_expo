@@ -15,4 +15,4 @@ class Category(models.Model):
         db_table = 'category'
 
     def __str__(self):
-        return f'{self.name_en}'
+        return f'{self.name}'
