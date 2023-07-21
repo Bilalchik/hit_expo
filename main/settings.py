@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # APPS
     'apps.users.apps.UsersConfig',
+    'apps.chat.apps.ChatConfig',
     # REST
     'rest_framework',
     'django_filters',
