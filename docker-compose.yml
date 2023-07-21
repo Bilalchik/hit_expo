@@ -1,0 +1,56 @@
+
+version: "2.2"
+
+services:
+  web:
+      build: .
+      restart: always
+      command: sh -c "python manage.py collectstatic --no-input && python manage.py migrate && gunicorn -w 7 -b 0.0.0.0:8000 main.wsgi --reload"
+      volumes:
+          - .:/app
+          - ./media:/app/media/
+          - ./static:/app/static/
+      ports:
+          - "8000:8000"
+      depends_on:
+          - pgdb
+
+  pgdb:
+    image: postgres:latest
+    container_name: pgdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+          - "5432:5432"
+    environment:
+      - POSTGRES_DB=expo_db
+      - POSTGRES_USER=hit_expo
+      - POSTGRES_PASSWORD=expo_123
+      - PORT=5432
+
+  nginx:
+      image: linuxserver/swag
+#      image: nginx:latest
+      restart: always
+      environment:
+          - PUID=1000
+          - PGID=1000
+          - TZ=Asia/Bishkek
+          - SUBDOMAINS=api
+          - VALIDATION=http
+          - ONLY_SUBDOMAINS=true
+          - STAGING=false
+      depends_on:
+          - web
+      ports:
+          - "80:80"
+          - "443:443"
+      volumes:
+          - ./nginx/nginx.conf:/config/nginx/conf.d
+          - ./media:/usr/media/
+          - lets:/config/keys/
+          - ./static:/usr/static/
+
+volumes:
+  postgres_data:
+  lets:
