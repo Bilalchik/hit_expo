@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'apps.categories.apps.CategoriesConfig',
     'apps.users.apps.UsersConfig',
     'apps.main_page',
+    'apps.investor',
     # REST
     'rest_framework',
     'django_filters',
