@@ -34,12 +34,10 @@ INSTALLED_APPS = [
     # APPS
     'apps.categories.apps.CategoriesConfig',
     'apps.users.apps.UsersConfig',
-<<<<<<< HEAD
-    'apps.chat.apps.ChatConfig',
-=======
+    'apps.chat',
     'apps.main_page',
     'apps.investor',
->>>>>>> c24275b40e656caf4001047c25a57ce12b54876a
+    'apps.other',
     # REST
     'rest_framework',
     'django_filters',

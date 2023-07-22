@@ -36,8 +36,8 @@ class CustomTokenRefreshSerializer(TokenRefreshSerializer):
         user_id = decoded_payload['user_id']
         user = User.objects.get(id=user_id)
         data.update({
-            'profile':
-            UserSerializer(user, context={'request': self.context['request']}).data
+            'profile': 
+                UserSerializer(user, context={'request': self.context['request']}).data
         })
         return data
 
