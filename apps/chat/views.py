@@ -2,6 +2,8 @@ from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
+
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
@@ -11,6 +13,12 @@ from .serializers import ChatRoomListSerializer, MessageCreateSerializer, Messag
 
 
 User = get_user_model()
+
+
+class MessagePagination(PageNumberPagination):
+    page_size = 20  # Количество сообщений на одной странице
+    page_size_query_param = 'page_size'
+    max_page_size = 100
 
 
 class ChatRoomListView(ListAPIView):
@@ -38,6 +46,7 @@ class SentListView(ListAPIView):
 
 
 class ChatRoomDetailView(APIView):
+    pagination_class = MessagePagination
 
     def get_chatroom(self, sender, receiver):
         try:
@@ -52,10 +61,21 @@ class ChatRoomDetailView(APIView):
                 chatroom = ChatRoom.objects.create(sender=sender, receiver=receiver)
         return chatroom
 
+    # def get(self, request, pk):
+    #     queryset = Message.objects.filter(chat__id=pk)
+    #     serializer = MessageListSerializer(queryset, many=True)
+    #     return Response(serializer.data)
+
     def get(self, request, pk):
-        queryset = Message.objects.filter(chat__id=pk)
-        serializer = MessageListSerializer(queryset, many=True)
-        return Response(serializer.data)
+        chatroom = get_object_or_404(ChatRoom, pk=pk)
+        messages = chatroom.messages.all().order_by('-timestamp')
+
+        # Применяем пагинацию к результату запроса
+        paginator = self.pagination_class()
+        page = paginator.paginate_queryset(messages, request)
+
+        serializer = MessageListSerializer(page, many=True)
+        return paginator.get_paginated_response(serializer.data)
 
     def post(self, request, pk):
         receiver = get_object_or_404(User, pk=pk)
