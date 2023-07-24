@@ -24,8 +24,11 @@ urlpatterns = [
     path('', include('apps.users.urls')),
     path('chat/', include('apps.chat.urls')),
     path('main_page/', include('apps.main_page.urls')),
+    path('investor/', include('apps.investor.urls')),
+    path('other/', include('apps.other.urls')),
 ] 
 
 urlpatterns += doc_urls
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

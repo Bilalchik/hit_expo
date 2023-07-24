@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import UserMVS, CustomTokenRefreshView, UserLoginView
+from .views import UserMVS, UserSMI, CustomTokenRefreshView, UserLoginView
 
 userPlural = {
     'get': 'list',
@@ -27,6 +27,9 @@ useSingle3 = {
 urlpatterns = [
     path('user/', UserMVS.as_view(userPlural)),
     path('user/<uuid:uniqueId>/', UserMVS.as_view(useSingle)),
+
+    path('user-smi/', UserSMI.as_view(userPlural)),
+    path('user-smi/<uuid:uniqueId>/', UserSMI.as_view(useSingle)),
 
     path('check/', CustomTokenRefreshView.as_view()),
 

@@ -1,15 +1,21 @@
 from rest_framework import serializers
 
-from apps.investor.models import Investor, Country
+from apps.investor.models import Investor, Country, Text
 
 
 class InvestorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Investor
-        fields = ('fio', 'title', 'image')
+        fields = ('id', 'fio', 'title', 'image')
 
 
 class CountrySerialzier(serializers.ModelSerializer):
     class Meta:
         model = Country
-        fields = ('title', 'image', 'description')
+        fields = ('id', 'title', 'image')
+
+
+class TextSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Text
+        fields = ('id', 'description')

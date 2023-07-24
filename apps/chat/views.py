@@ -37,24 +37,6 @@ class SentListView(ListAPIView):
         return ChatRoom.objects.filter(sender__id=self.request.user.id)
 
 
-# class ChatRoomDetailView(APIView):
-#
-#     def get(self, request, pk):
-#         queryset = Message.objects.filter(chat__id=pk)
-#
-#         serializer = MessageListSerializer(queryset, many=True)
-#         return Response(serializer.data)
-#
-#     def post(self, request, pk):
-#
-#         serializer = MessageCreateSerializer(data=request.data, context={'request': request})
-#
-#         if serializer.is_valid(raise_exception=True):
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(status=status.HTTP_400_BAD_REQUEST)
-#
-
 class ChatRoomDetailView(APIView):
 
     def get_chatroom(self, sender, receiver):

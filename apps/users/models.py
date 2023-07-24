@@ -236,3 +236,66 @@ class User(AbstractUser):
         if not self.id:
             self.uniqueId = uuid.uuid4()
         super(User, self).save(force_insert=False, force_update=False, using=None, update_fields=None)
+
+
+class UserSMI(models.Model):
+
+    class Meta:
+        verbose_name = "Пользователь"
+        verbose_name_plural = "Пользователи"
+
+    def __str__(self):
+        return self.email.__str__()
+
+    username = None
+    date_joined = None
+    first_name = None
+    last_name = None
+    last_login = None
+
+    image_certificate = models.ImageField(verbose_name="Загрузите вашего журналистского удостоверения в  png или jpg", upload_to='images/certificate-smi', **parametersForNull)
+    image_logo = models.ImageField(verbose_name="Загрузите логотип компании в png или jpg", upload_to='images/logo-smi', **parametersForNull)
+    quantity_person = models.CharField(max_length=300, verbose_name="Сколько у вас человек в команде ?", **parametersForNull)
+    name_organization = models.CharField(max_length=300, verbose_name="Полное юридическое наименование организации", **parametersForNull)
+    address = models.CharField(max_length=300, verbose_name="Юридический адрес", **parametersForNull)
+    web_site = models.CharField(verbose_name="Веб-сайт", max_length=300, **parametersForNull)
+    email_company = models.EmailField(verbose_name="Email компании", max_length=300, **parametersForNull)
+    phone_smi = models.BigIntegerField(verbose_name="Телефон", **parametersForNull)
+
+    uniqueId = models.UUIDField(unique=True, verbose_name="Уникальный id", **parametersForNull)
+    email = models.EmailField(max_length=200, verbose_name="Email", unique=True)
+
+    #_____________________SOCIAL SITE____________________________________________________________________________
+    instagram = models.CharField(verbose_name="Instagram", max_length=300, **parametersForNull)
+    facebook = models.CharField(verbose_name="Facebook", max_length=300, **parametersForNull)
+    twitter = models.CharField(verbose_name="Twitter", max_length=300, **parametersForNull)
+
+    ########  Как вы узнали о мероприятие?   #########
+    whatsapp_bool = models.BooleanField(verbose_name="WhatsApp", default=False)
+    telegram_bool = models.BooleanField(verbose_name="Telegram", default=False)
+    radio_bool = models.BooleanField(verbose_name="Радио реклама", default=False)
+    tv_bool = models.BooleanField(verbose_name="ТВ", default=False)
+    instagram_bool = models.BooleanField(verbose_name="Инстаграм", default=False)
+    invite_mail = models.BooleanField(verbose_name="Приглашение от организаторов по почте", default=False)
+    invite_fair = models.BooleanField(verbose_name="Приглашение от экспонента выставки", default=False)
+    invite_minister = models.BooleanField(verbose_name="Приглашение от Министерства / ведомства", default=False)
+    message = models.BooleanField(verbose_name="Сообщение по тел/факсу от организаторов", default=False)
+    ad_city = models.BooleanField(verbose_name="Наружная реклама в городе", default=False)
+
+    ##########################      Ваши цели посещение HIT Expo?      SMI      ###############################
+    smi_bool_one = models.BooleanField(verbose_name="Стать частью информационной поддержки", default=False)
+    smi_bool_two = models.BooleanField(verbose_name="Знакомство с новыми компаниями", default=False)
+    smi_bool_three = models.BooleanField(verbose_name="Освещение и полезная информация", default=False)
+    smi_bool_four = models.BooleanField(verbose_name="Участие на пресс-конференции", default=False)
+
+    USERNAME_FIELD = 'email'
+
+    REQUIRED_FIELDS = []
+
+    objects = CustomManager()
+
+    def save(self, force_insert=False, force_update=False, using=None,
+            update_fields=None):
+        if not self.id:
+            self.uniqueId = uuid.uuid4()
+        super(UserSMI, self).save(force_insert=False, force_update=False, using=None, update_fields=None)

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'apps.chat.apps.ChatConfig',
     'apps.main_page',
     'apps.investor',
+    'apps.other',
     # REST
     'rest_framework',
     'django_filters',
