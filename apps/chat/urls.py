@@ -3,6 +3,8 @@ from . import views
 
 
 urlpatterns = [
-    path('chats/', views.MessageListView.as_view()),
-    path('chat/<int:pk>', views.MessageCreateDetailView.as_view())
+    path('chats/', views.ChatRoomListView.as_view()),
+    path('incoming/', views.IncomingListView.as_view()),
+    path('sent/', views.SentListView.as_view()),
+    path('chat_room_detail/<int:pk>/', views.ChatRoomDetailView.as_view()),
 ]

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Message
+from .models import Message, ChatRoom
 from apps.users.models import User
 
 
@@ -10,12 +10,12 @@ class UserNameSerializer(serializers.ModelSerializer):
         fields = ('id', 'username')
 
 
-class MessageListSerializer(serializers.ModelSerializer):
+class ChatRoomListSerializer(serializers.ModelSerializer):
     sender = UserNameSerializer()
     receiver = UserNameSerializer()
 
     class Meta:
-        model = Message
+        model = ChatRoom
         fields = '__all__'
 
 
@@ -24,6 +24,15 @@ class MessageCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Message
-        fields = ('sender', 'receiver', 'content', 'file')
+        fields = ('sender', 'content', 'file')
+
+
+class MessageListSerializer(serializers.ModelSerializer):
+    sender = UserNameSerializer()
+    chat = ChatRoomListSerializer()
+
+    class Meta:
+        model = Message
+        fields = ('id', 'sender', 'content', 'file', 'timestamp', 'chat')
 
 

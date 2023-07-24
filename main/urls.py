@@ -22,6 +22,7 @@ urlpatterns = [
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     # APPS
     path('', include('apps.users.urls')),
+    path('chat/', include('apps.chat.urls')),
     path('main_page/', include('apps.main_page.urls')),
     path('investor/', include('apps.investor.urls')),
     path('other/', include('apps.other.urls')),

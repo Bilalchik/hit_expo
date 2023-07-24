@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     # APPS
     'apps.categories.apps.CategoriesConfig',
     'apps.users.apps.UsersConfig',
-    'apps.chat',
+    'apps.chat.apps.ChatConfig',
     'apps.main_page',
     'apps.investor',
     'apps.other',
