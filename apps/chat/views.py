@@ -8,9 +8,10 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 
+from apps.users.models import User
+
 from .models import Message, ChatRoom
 from .serializers import ChatRoomListSerializer, MessageCreateSerializer, MessageListSerializer
-
 
 User = get_user_model()
 
@@ -61,11 +62,6 @@ class ChatRoomDetailView(APIView):
                 chatroom = ChatRoom.objects.create(sender=sender, receiver=receiver)
         return chatroom
 
-    # def get(self, request, pk):
-    #     queryset = Message.objects.filter(chat__id=pk)
-    #     serializer = MessageListSerializer(queryset, many=True)
-    #     return Response(serializer.data)
-
     def get(self, request, pk):
         chatroom = get_object_or_404(ChatRoom, pk=pk)
         messages = chatroom.messages.all().order_by('-timestamp')
@@ -92,5 +88,9 @@ class ChatRoomDetailView(APIView):
             serializer.save(chat=chatroom)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
 
 

@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 from rest_framework_simplejwt.state import token_backend
+from rest_framework.exceptions import PermissionDenied
+
 from apps.users.models import User, UserSMI
 
 
@@ -64,6 +66,36 @@ class UserSMISerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+
 class LoginUserSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
     password = serializers.CharField(required=True)
+
+
+class UserListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+
+
+class UserSMIListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserSMI
+        fields = '__all__'
+
+
+class CombinedUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        user = self.context['request'].user
+        if isinstance(instance, User) and instance == user:
+            return UserListSerializer(instance).to_representation(instance)
+        elif isinstance(instance, UserSMI) and instance == user:
+            return UserSMIListSerializer(instance).to_representation(instance)
+        else:
+            raise PermissionDenied("You do not have permission to view this data.")
+
+

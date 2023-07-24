@@ -1,6 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
-
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets, permissions, status, generics
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from django.contrib.auth.hashers import check_password
@@ -10,7 +10,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 
 from apps.users.models import User
 from apps.users.serializers import (
-    UserCRUDSerializer, CustomTokenRefreshSerializer, LoginUserSerializer, UserSMISerializer
+    UserCRUDSerializer, CustomTokenRefreshSerializer, LoginUserSerializer, UserSMISerializer, CombinedUserSerializer
 )
 
 
@@ -84,3 +84,12 @@ class UserLoginView(APIView):
             pass
         
         return Response(status=status.HTTP_403_FORBIDDEN)
+
+
+class CurrentUserView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        serializer = CombinedUserSerializer(user, context={'request': request})
+        return Response(serializer.data)
