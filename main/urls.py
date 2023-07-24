@@ -22,13 +22,9 @@ urlpatterns = [
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     # APPS
     path('', include('apps.users.urls')),
-<<<<<<< HEAD
     path('chat/', include('apps.chat.urls')),
-]
-=======
     path('main_page/', include('apps.main_page.urls')),
 ] 
->>>>>>> c24275b40e656caf4001047c25a57ce12b54876a
 
 urlpatterns += doc_urls
 if settings.DEBUG:
