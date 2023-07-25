@@ -23,6 +23,10 @@ class ChatRoom(models.Model):
     def __str__(self):
         return f"{self.sender} -> {self.receiver}"
 
+    class Meta:
+        verbose_name = 'Комната для чата'
+        verbose_name_plural = 'Комнаты для чата'
+
 
 class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='send_messages', verbose_name='Отправитель')

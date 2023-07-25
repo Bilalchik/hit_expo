@@ -26,7 +26,8 @@ urlpatterns = [
     path('main_page/', include('apps.main_page.urls')),
     path('investor/', include('apps.investor.urls')),
     path('other/', include('apps.other.urls')),
-] 
+    path('trade_zone/', include('apps.trade_zone.urls')),
+]
 
 urlpatterns += doc_urls
 if settings.DEBUG:
