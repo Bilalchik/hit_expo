@@ -19,6 +19,7 @@ schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('rest_framework', include('rest_framework.urls')),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     # APPS
     path('', include('apps.users.urls')),

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # LIB
     'corsheaders',
     'drf_yasg',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -79,6 +80,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'main.wsgi.application'
+ASGI_APPLICATION = 'chat.routing.application'
 
 
 # Database
