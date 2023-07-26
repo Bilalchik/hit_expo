@@ -28,6 +28,7 @@ urlpatterns = [
     path('investor/', include('apps.investor.urls')),
     path('other/', include('apps.other.urls')),
     path('trade_zone/', include('apps.trade_zone.urls')),
+    path('invest_zone/', include('apps.invest_zone.urls')),
 ]
 
 urlpatterns += doc_urls

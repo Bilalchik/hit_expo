@@ -89,6 +89,7 @@ class StandZone(models.Model):
     block_title = models.CharField(max_length=300, verbose_name='Заглавный текст')
     block_description = models.TextField(verbose_name='Описание')
     photo = models.ManyToManyField(StandPhoto, verbose_name='Фото Стендов')
+    subtext = models.CharField(max_length=300, verbose_name='Текст об окончании бронирования')
 
     def __str__(self):
         return self.block_title
