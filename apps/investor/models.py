@@ -26,6 +26,7 @@ class Country(models.Model):
         verbose_name = 'Страна'
         verbose_name_plural = 'Страны'
 
+
 class Text(models.Model):
     description = models.TextField(verbose_name='Описание сайта')
 
