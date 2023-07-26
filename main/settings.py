@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'apps.other',
     'apps.trade_zone',
     'apps.invest_zone',
+    'apps.fashion_zone',
     # REST
     'rest_framework',
     'django_filters',

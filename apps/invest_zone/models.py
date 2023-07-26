@@ -52,6 +52,7 @@ class Stand(models.Model):
     title = models.CharField(max_length=300, verbose_name='Название')
     number_of_places = models.PositiveIntegerField(verbose_name='Кол-во мест')
     terms = models.ManyToManyField(Terms, verbose_name='Условия у Стенда')
+    price = models.DecimalField(verbose_name='Цена', decimal_places=2, max_digits=12, default=0.00)
 
     def __str__(self):
         return self.title
