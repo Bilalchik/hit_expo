@@ -24,6 +24,8 @@ SECRET_ADMIN_KEY = '12345'
 
 # Application definition
 INSTALLED_APPS = [
+    'channels',
+    'daphne',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,7 +49,6 @@ INSTALLED_APPS = [
     # LIB
     'corsheaders',
     'drf_yasg',
-    'channels',
 ]
 
 MIDDLEWARE = [
