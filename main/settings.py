@@ -19,6 +19,7 @@ ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = "users.User"
 
+
 SECRET_ADMIN_KEY = '12345'
 
 # Application definition
