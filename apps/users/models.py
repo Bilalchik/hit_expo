@@ -41,7 +41,7 @@ class User(AbstractUser):
         return self.email.__str__()
 
     username = models.CharField(verbose_name='Имя / Компания', max_length= 300)
-    date_joined = models.DateTimeField(verbose_name='Дата Регистрация ', max_length= 300)
+    date_joined = models.DateTimeField(verbose_name='Дата Регистрация ', max_length= 300, blank=True , null=True)
     # first_name = None
     # last_name = None
     # last_login = None
