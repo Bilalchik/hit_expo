@@ -1,5 +1,5 @@
 from rest_framework import serializers as s
-from .models import Category
+from apps.categories.models import Category
 
 
 class RecursiveSerializer(s.Serializer):

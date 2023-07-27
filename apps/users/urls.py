@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import UserMVS, UserSMIViewSet, CustomTokenRefreshView, UserLoginView, CurrentUserView , BookListCreateView, BookRetrieveUpdateDeleteView, BookSearchView
+from .views import UserMVS, UserSMIViewSet, CustomTokenRefreshView, UserLoginView, CurrentUserView, ExpertViewSet, VisitorViewSet, GosUserViewSet, ParticipantViewSet, BookSearchView, BookListCreateView, BookRetrieveUpdateDeleteView
 
 userPlural = {
     'get': 'list',
@@ -30,6 +30,18 @@ urlpatterns = [
 
     path('user-smi/', UserSMIViewSet.as_view(userPlural)),
     path('user-smi/<uuid:uniqueId>/', UserSMIViewSet.as_view(useSingle)),
+
+    path('user-expert/', ExpertViewSet.as_view(userPlural)),
+    path('user-expert/<uuid:uniqueId>/', ExpertViewSet.as_view(useSingle)),
+
+    path('user-visitor/', VisitorViewSet.as_view(userPlural)),
+    path('user-visitor/<uuid:uniqueId>/', VisitorViewSet.as_view(useSingle)),
+
+    path('user-gos/', GosUserViewSet.as_view(userPlural)),
+    path('user-gos/<uuid:uniqueId>/', GosUserViewSet.as_view(useSingle)),
+
+    path('user-participant/', ParticipantViewSet.as_view(userPlural)),
+    path('user-participant/<uuid:uniqueId>/', ParticipantViewSet.as_view(useSingle)),
 
     path('profile/', CurrentUserView.as_view()),
 

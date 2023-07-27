@@ -4,7 +4,7 @@ from rest_framework_simplejwt.state import token_backend
 from rest_framework.exceptions import PermissionDenied
 from .models import Book
 
-from apps.users.models import User, UserSMI, Expert, Visitor, GosUser, UserType
+from apps.users.models import User, Participant, UserSMI, Expert, Visitor, GosUser, UserType
 
 
 class UserCRUDSerializer(serializers.ModelSerializer):
@@ -48,7 +48,7 @@ class UserSMISerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserSMI
-        exclude = ['groups', 'user_type', 'user_permissions', 'resetPasswordUUID', 'resetPasswordDate']
+        exclude = ['groups', 'user_permissions', 'resetPasswordUUID', 'resetPasswordDate']
 
     def create(self, validated_data):
         user_smi = UserSMI(**validated_data)
@@ -107,6 +107,20 @@ class GosUserSerializer(serializers.ModelSerializer):
         gos_user.set_password(validated_data['password'])
         gos_user.save()
         return gos_user
+
+
+class ParticipantSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(max_length=400, required=False)
+
+    class Meta:
+        model = Participant
+        exclude = ['groups', 'user_permissions', 'resetPasswordUUID', 'resetPasswordDate']
+
+    def create(self, validated_data):
+        participant = Participant(**validated_data)
+        participant.set_password(validated_data['password'])
+        participant.save()
+        return participant
 
 
 class LoginUserSerializer(serializers.Serializer):

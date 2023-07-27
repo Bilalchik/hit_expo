@@ -7,7 +7,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 
    
 from django.db.models import Q
-from .models import Book
+from .models import Book, Participant
 from .serializers import BookSerializer
 from rest_framework import generics
 
@@ -16,7 +16,7 @@ from rest_framework import generics
 from apps.users.models import User, UserSMI, Expert, Visitor, GosUser, UserType
 from apps.users.serializers import (
     UserCRUDSerializer, CustomTokenRefreshSerializer, LoginUserSerializer, UserSMISerializer, CombinedUserSerializer,
-    ExpertSerializer, VisitorSerializer, GosUserSerializer
+    ExpertSerializer, VisitorSerializer, GosUserSerializer, ParticipantSerializer
 )
 
 
@@ -47,7 +47,7 @@ class UserMVS(viewsets.ModelViewSet):
 
 
 class UserSMIViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+    queryset = UserSMI.objects.all()
     lookup_field = 'uniqueId'
     serializer_class = UserSMISerializer
     filter_backends = [filters.SearchFilter]
@@ -68,6 +68,98 @@ class UserSMIViewSet(viewsets.ModelViewSet):
         serializer.save()
         return Response(serializer.data)
     
+
+class ExpertViewSet(viewsets.ModelViewSet):
+    queryset = Expert.objects.all()
+    lookup_field = 'uniqueId'
+    serializer_class = UserSMISerializer
+    filter_backends = [filters.SearchFilter]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.serializer_class(
+            data=request.data, context={'request': request}
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def update(self, request, *args, **kwargs):
+        user = request.user
+        data = request.data.dict()
+        serializer = ExpertSerializer(user, data=data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+
+class VisitorViewSet(viewsets.ModelViewSet):
+    queryset = Visitor.objects.all()
+    lookup_field = 'uniqueId'
+    serializer_class = UserSMISerializer
+    filter_backends = [filters.SearchFilter]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.serializer_class(
+            data=request.data, context={'request': request}
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def update(self, request, *args, **kwargs):
+        user = request.user
+        data = request.data.dict()
+        serializer = VisitorSerializer(user, data=data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+
+class GosUserViewSet(viewsets.ModelViewSet):
+    queryset = GosUser.objects.all()
+    lookup_field = 'uniqueId'
+    serializer_class = UserSMISerializer
+    filter_backends = [filters.SearchFilter]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.serializer_class(
+            data=request.data, context={'request': request}
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def update(self, request, *args, **kwargs):
+        user = request.user
+        data = request.data.dict()
+        serializer = GosUserSerializer(user, data=data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+
+class ParticipantViewSet(viewsets.ModelViewSet):
+    queryset = Participant.objects.all()
+    lookup_field = 'uniqueId'
+    serializer_class = UserSMISerializer
+    filter_backends = [filters.SearchFilter]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.serializer_class(
+            data=request.data, context={'request': request}
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def update(self, request, *args, **kwargs):
+        user = request.user
+        data = request.data.dict()
+        serializer = ParticipantSerializer(user, data=data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
 
 class CustomTokenRefreshView(TokenRefreshView):
     serializer_class = CustomTokenRefreshSerializer
@@ -103,6 +195,8 @@ class UserLoginView(APIView):
             return GosUserSerializer(user)
         elif user.user_type == UserType.EXPERT:
             return ExpertSerializer(user)
+        elif user.user_type == UserType.PARTICIPANT:
+            return ParticipantSerializer(user)
 
     def _get_user(self, user_type, user_id):
 
@@ -114,6 +208,8 @@ class UserLoginView(APIView):
             return GosUser.objects.get(id=user_id)
         elif user_type == UserType.EXPERT:
             return Expert.objects.get(id=user_id)
+        elif user_type == UserType.PARTICIPANT:
+            return Participant.objects.get(id=user_id)
 
 
 class CurrentUserView(APIView):
