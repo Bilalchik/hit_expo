@@ -36,9 +36,6 @@ INSTALLED_APPS = [
     'apps.users.apps.UsersConfig',
     'apps.chat.apps.ChatConfig',
     'apps.main_page',
-    'apps.trade_zone',
-    'apps.invest_zone',
-    'apps.fashion_zone',
     'apps.investor',
     'apps.other',
     'apps.ticket',
@@ -89,7 +86,7 @@ ASGI_APPLICATION = 'chat.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-#
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -98,15 +95,17 @@ DATABASES = {
 }
 
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'expo_db',
-#         'USER': 'hit_expo',
-#         'PASSWORD': 'expo_123',
-#         'HOST': 'pgdb',
-#         'PORT': '5432',
-#     }
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'expo_db',
+#        'USER': 'hit_expo',
+#        'PASSWORD': 'expo_123',
+#        'HOST': 'pgdb',
+#        'PORT': '5432',
+#    }
 # }
+
+
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
