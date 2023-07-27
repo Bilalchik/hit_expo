@@ -1,8 +1,8 @@
 from rest_framework.filters import SearchFilter
-
-from .models import Category
-from .serializers import CategorySerializer
 from rest_framework import generics
+
+from apps.categories.models import Category
+from apps.categories.serializers import CategorySerializer
 
 
 class CategoryList(generics.ListAPIView):

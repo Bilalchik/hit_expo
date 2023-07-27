@@ -1,10 +1,11 @@
-import django_heroku
 import os
+import django_heroku
+
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -22,7 +23,6 @@ AUTH_USER_MODEL = "users.User"
 SECRET_ADMIN_KEY = '12345'
 
 # Application definition
-
 INSTALLED_APPS = [
     'jazzmin',
     'django.contrib.admin',
@@ -36,11 +36,12 @@ INSTALLED_APPS = [
     'apps.users.apps.UsersConfig',
     'apps.chat.apps.ChatConfig',
     'apps.main_page',
-    'apps.investor',
-    'apps.other',
     'apps.trade_zone',
     'apps.invest_zone',
     'apps.fashion_zone',
+    'apps.investor',
+    'apps.other',
+    'apps.ticket',
     # REST
     'rest_framework',
     'django_filters',
@@ -82,29 +83,30 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'main.wsgi.application'
+
 ASGI_APPLICATION = 'chat.routing.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 #
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'expo_db',
+#         'USER': 'hit_expo',
+#         'PASSWORD': 'expo_123',
+#         'HOST': 'pgdb',
+#         'PORT': '5432',
 #     }
 # }
-
-DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': 'expo_db',
-       'USER': 'hit_expo',
-       'PASSWORD': 'expo_123',
-       'HOST': 'pgdb',
-       'PORT': '5432',
-   }
-}
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -152,7 +154,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # CORS
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_ALLOW_ALL = True
@@ -174,3 +175,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 django_heroku.settings(locals())
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=7),
+    'SLIDING_TOKEN_REFRESH_TIMEOUT': timedelta(days=6),
+    'ROTATE_REFRESH_TOKENS': False,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
