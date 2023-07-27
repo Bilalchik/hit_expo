@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import UserMVS, UserSMI, CustomTokenRefreshView, UserLoginView, CurrentUserView
+from apps.users.views import UserMVS, UserSMI, CustomTokenRefreshView, UserLoginView, CurrentUserView
 
 userPlural = {
     'get': 'list',

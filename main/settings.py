@@ -1,10 +1,11 @@
-import django_heroku
 import os
+import django_heroku
+
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -22,7 +23,6 @@ AUTH_USER_MODEL = "users.User"
 SECRET_ADMIN_KEY = '12345'
 
 # Application definition
-
 INSTALLED_APPS = [
     'jazzmin',
     'django.contrib.admin',
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'apps.main_page',
     'apps.investor',
     'apps.other',
+    'apps.ticket',
     # REST
     'rest_framework',
     'django_filters',
@@ -79,6 +80,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'main.wsgi.application'
+
 ASGI_APPLICATION = 'chat.routing.application'
 
 
@@ -151,7 +153,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # CORS
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_ALLOW_ALL = True
@@ -174,3 +175,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 django_heroku.settings(locals())
 
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=7),
+    'SLIDING_TOKEN_REFRESH_TIMEOUT': timedelta(days=6),
+    'ROTATE_REFRESH_TOKENS': False,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
