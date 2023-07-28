@@ -1,10 +1,12 @@
 import uuid, os
 
-from django.contrib.auth.models import AbstractUser
-from apps.users.managers import CustomManager
 from django.db import models
+from django.db.models import Q
+from django.shortcuts import render
+from django.contrib.auth.models import AbstractUser
 
-from .choices import Organization, Industry
+from apps.users.choices import Organization, Industry
+from apps.users.managers import CustomManager
 
 
 parametersForNull = {
@@ -39,11 +41,11 @@ class User(AbstractUser):
     def __str__(self):
         return self.email.__str__()
 
-    username = None
-    date_joined = None
-    first_name = None
-    last_name = None
-    last_login = None
+    username = models.CharField(verbose_name='Имя / Компания', max_length= 300)
+    date_joined = models.DateTimeField(verbose_name='Дата Регистрация ', max_length= 300)
+    # first_name = None
+    # last_name = None
+    # last_login = None
 
     ####################################.       PASSWORD    #################################
     user_type = models.PositiveSmallIntegerField(choices=UserType.choices, default=UserType.VISITOR, verbose_name="Тип пользователя")
@@ -249,3 +251,21 @@ class GosUser(User):
     gos_bool_two = models.BooleanField(verbose_name="Потенциал выставки", default=False)
     gos_bool_three = models.BooleanField(verbose_name="Развитие экономики Кыргызстана", default=False)
     gos_bool_four = models.BooleanField(verbose_name="Инвестиционные проекты", default=False)
+    
+##############################     Global Search #############################    
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.CharField(max_length=100)
+    genre = models.CharField(max_length=50)
+    
+def global_search(request):
+    search_query = request.GET.get('q', '')  # Получаем запрос поиска из параметра 'q' в URL
+
+    # Ищем пользователей, удовлетворяющих поисковому запросу (username или email)
+    users = User.objects.filter(Q(username__icontains=search_query) | Q(email__icontains=search_query))
+
+    context = {
+        'users': users,
+        'search_query': search_query,
+    }
+    return render(request, 'search_results.html', context)

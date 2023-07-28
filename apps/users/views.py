@@ -5,7 +5,15 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from apps.users.models import User, UserSMI, Expert, Visitor, GosUser, UserType, Participant
+   
+from django.db.models import Q
+from .models import Book, Participant
+from .serializers import BookSerializer
+from rest_framework import generics
+
+
+
+from apps.users.models import User, UserSMI, Expert, Visitor, GosUser, UserType
 from apps.users.serializers import (
     UserCRUDSerializer, CustomTokenRefreshSerializer, LoginUserSerializer, UserSMISerializer, CombinedUserSerializer,
     ExpertSerializer, VisitorSerializer, GosUserSerializer, ParticipantSerializer
@@ -211,3 +219,22 @@ class CurrentUserView(APIView):
         user = request.user
         serializer = CombinedUserSerializer(user, context={'request': request})
         return Response(serializer.data)
+
+
+
+
+class BookListCreateView(generics.ListCreateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+class BookRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    
+    
+class BookSearchView(generics.ListAPIView):
+    serializer_class = BookSerializer
+
+    def get_queryset(self):
+        search_query = self.request.query_params.get('q', '')
+        return Book.objects.filter(Q(title__icontains=search_query) | Q(author__icontains=search_query) | Q(genre__icontains=search_query))

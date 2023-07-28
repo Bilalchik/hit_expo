@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 from rest_framework_simplejwt.state import token_backend
 from rest_framework.exceptions import PermissionDenied
+from .models import Book
 
 from apps.users.models import User, Participant, UserSMI, Expert, Visitor, GosUser, UserType
 
@@ -152,3 +153,10 @@ class CombinedUserSerializer(serializers.ModelSerializer):
             return UserSMIListSerializer(instance).to_representation(instance)
         else:
             raise PermissionDenied("You do not have permission to view this data.")
+        
+
+
+class BookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields = '__all__'

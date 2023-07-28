@@ -20,6 +20,7 @@ ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = "users.User"
 
+
 SECRET_ADMIN_KEY = '12345'
 
 # Application definition
@@ -36,11 +37,14 @@ INSTALLED_APPS = [
     # APPS
     'apps.categories.apps.CategoriesConfig',
     'apps.users.apps.UsersConfig',
-    'apps.chat.apps.ChatConfig',
+    'apps.chat',
     'apps.main_page',
     'apps.investor',
     'apps.other',
     'apps.ticket',
+    'apps.fashion_zone',
+    'apps.invest_zone',
+    'apps.trade_zone',
     # REST
     'rest_framework',
     'django_filters',
@@ -83,7 +87,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'main.wsgi.application'
 
 ASGI_APPLICATION = 'chat.routing.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -174,9 +177,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-django_heroku.settings(locals())
-
-
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
@@ -187,3 +187,5 @@ SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY,
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
+
+django_heroku.settings(locals())

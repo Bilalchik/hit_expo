@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import UserMVS, UserSMIViewSet, CustomTokenRefreshView, UserLoginView, CurrentUserView, ExpertViewSet, VisitorViewSet, GosUserViewSet, ParticipantViewSet
+from .views import UserMVS, UserSMIViewSet, CustomTokenRefreshView, UserLoginView, CurrentUserView, ExpertViewSet, VisitorViewSet, GosUserViewSet, ParticipantViewSet, BookSearchView, BookListCreateView, BookRetrieveUpdateDeleteView
 
 userPlural = {
     'get': 'list',
@@ -48,4 +48,9 @@ urlpatterns = [
     path('check/', CustomTokenRefreshView.as_view()),
 
     path('login/', UserLoginView.as_view()),
+    
+    
+    path('books/', BookListCreateView.as_view(), name='book-list-create'),
+    path('books/<int:pk>/', BookRetrieveUpdateDeleteView.as_view(), name='book-retrieve-update-delete'),
+    path('books/search/', BookSearchView.as_view(), name='book-search'),
 ]
