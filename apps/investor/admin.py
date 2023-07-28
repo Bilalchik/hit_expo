@@ -1,5 +1,4 @@
 from django.contrib import admin
+from apps.investor.models import Investor, Country , Organizer, Sponsors
 
-from apps.investor.models import Investor, Country
-
-admin.site.register((Investor, Country))
+admin.site.register((Investor, Country,Organizer, Sponsors))
