@@ -40,11 +40,10 @@ class User(AbstractUser):
     def __str__(self):
         return self.email.__str__()
 
-    username = models.CharField(verbose_name='Имя / Компания', max_length= 300)
-    date_joined = models.DateTimeField(verbose_name='Дата Регистрация ', max_length= 300, blank=True , null=True)
-    # first_name = None
-    # last_name = None
-    # last_login = None
+    username = None
+    first_name = None
+    last_name = None
+    last_login = None
 
     ####################################.       PASSWORD    #################################
     user_type = models.PositiveSmallIntegerField(choices=UserType.choices, default=UserType.VISITOR, verbose_name="Тип пользователя")

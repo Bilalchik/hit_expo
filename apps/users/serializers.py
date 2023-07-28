@@ -30,19 +30,6 @@ class UserCRUDSerializer(serializers.ModelSerializer):
         return instance
 
 
-class CustomTokenRefreshSerializer(TokenRefreshSerializer):
-    def validate(self, attrs):
-        data = super(CustomTokenRefreshSerializer, self).validate(attrs)
-        decoded_payload = token_backend.decode(data['access'], verify=True)
-        user_id = decoded_payload['user_id']
-        user = User.objects.get(id=user_id)
-        data.update({
-            'profile':
-                UserSerializer(user, context={'request': self.context['request']}).data
-        })
-        return data
-
-
 class UserSMISerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=400, required=False)
 
@@ -153,10 +140,22 @@ class CombinedUserSerializer(serializers.ModelSerializer):
             return UserSMIListSerializer(instance).to_representation(instance)
         else:
             raise PermissionDenied("You do not have permission to view this data.")
-        
 
 
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = '__all__'
+
+
+class CustomTokenRefreshSerializer(TokenRefreshSerializer):
+    def validate(self, attrs):
+        data = super(CustomTokenRefreshSerializer, self).validate(attrs)
+        decoded_payload = token_backend.decode(data['access'], verify=True)
+        user_id = decoded_payload['user_id']
+        user = User.objects.get(id=user_id)
+        data.update({
+            'profile':
+                UserSerializer(user, context={'request': self.context['request']}).data
+        })
+        return data
