@@ -41,6 +41,7 @@ class User(AbstractUser):
         return self.email.__str__()
 
     username = None
+    date_joined = None
     first_name = None
     last_name = None
     last_login = None
