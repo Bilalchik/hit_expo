@@ -5,10 +5,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from apps.users.models import User, UserSMI, Expert, Visitor, GosUser, UserType, Participant
+from django.db.models import Q
+from .models import Book, Participant
+from rest_framework import generics
+
+from apps.users.models import User, UserSMI, Expert, Visitor, GosUser, UserType
 from apps.users.serializers import (
     UserCRUDSerializer, CustomTokenRefreshSerializer, LoginUserSerializer, UserSMISerializer, CombinedUserSerializer,
-    ExpertSerializer, VisitorSerializer, GosUserSerializer, ParticipantSerializer
+    ExpertSerializer, VisitorSerializer, GosUserSerializer, ParticipantSerializer, BookSerializer
 )
 
 
@@ -53,9 +57,9 @@ class UserSMIViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
-        user = request.user
+        user_smi = request.user_smi
         data = request.data.dict()
-        serializer = UserSMISerializer(user, data=data, context={'request': request})
+        serializer = UserSMISerializer(user_smi, data=data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
@@ -64,7 +68,7 @@ class UserSMIViewSet(viewsets.ModelViewSet):
 class ExpertViewSet(viewsets.ModelViewSet):
     queryset = Expert.objects.all()
     lookup_field = 'uniqueId'
-    serializer_class = UserSMISerializer
+    serializer_class = ExpertSerializer
     filter_backends = [filters.SearchFilter]
 
     def create(self, request, *args, **kwargs):
@@ -76,9 +80,9 @@ class ExpertViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
-        user = request.user
+        expert = request.expert
         data = request.data.dict()
-        serializer = ExpertSerializer(user, data=data, context={'request': request})
+        serializer = ExpertSerializer(expert, data=data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
@@ -87,7 +91,7 @@ class ExpertViewSet(viewsets.ModelViewSet):
 class VisitorViewSet(viewsets.ModelViewSet):
     queryset = Visitor.objects.all()
     lookup_field = 'uniqueId'
-    serializer_class = UserSMISerializer
+    serializer_class = VisitorSerializer
     filter_backends = [filters.SearchFilter]
 
     def create(self, request, *args, **kwargs):
@@ -99,9 +103,9 @@ class VisitorViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
-        user = request.user
+        visitor = request.visitor
         data = request.data.dict()
-        serializer = VisitorSerializer(user, data=data, context={'request': request})
+        serializer = VisitorSerializer(visitor, data=data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
@@ -110,7 +114,7 @@ class VisitorViewSet(viewsets.ModelViewSet):
 class GosUserViewSet(viewsets.ModelViewSet):
     queryset = GosUser.objects.all()
     lookup_field = 'uniqueId'
-    serializer_class = UserSMISerializer
+    serializer_class = GosUserSerializer
     filter_backends = [filters.SearchFilter]
 
     def create(self, request, *args, **kwargs):
@@ -122,9 +126,9 @@ class GosUserViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
-        user = request.user
+        gos_user = request.gos_user
         data = request.data.dict()
-        serializer = GosUserSerializer(user, data=data, context={'request': request})
+        serializer = GosUserSerializer(gos_user, data=data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
@@ -133,7 +137,7 @@ class GosUserViewSet(viewsets.ModelViewSet):
 class ParticipantViewSet(viewsets.ModelViewSet):
     queryset = Participant.objects.all()
     lookup_field = 'uniqueId'
-    serializer_class = UserSMISerializer
+    serializer_class = ParticipantSerializer
     filter_backends = [filters.SearchFilter]
 
     def create(self, request, *args, **kwargs):
@@ -145,9 +149,9 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
-        user = request.user
+        participant = request.participant
         data = request.data.dict()
-        serializer = ParticipantSerializer(user, data=data, context={'request': request})
+        serializer = ParticipantSerializer(participant, data=data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
@@ -211,3 +215,21 @@ class CurrentUserView(APIView):
         user = request.user
         serializer = CombinedUserSerializer(user, context={'request': request})
         return Response(serializer.data)
+
+
+class BookListCreateView(generics.ListCreateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+
+class BookRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    
+    
+class BookSearchView(generics.ListAPIView):
+    serializer_class = BookSerializer
+
+    def get_queryset(self):
+        search_query = self.request.query_params.get('q', '')
+        return Book.objects.filter(Q(title__icontains=search_query) | Q(author__icontains=search_query) | Q(genre__icontains=search_query))

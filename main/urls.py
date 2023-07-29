@@ -1,5 +1,5 @@
-from django.contrib import admin
 from django.urls import path, include
+from django.contrib import admin
 from django.conf.urls.static import static
 
 from rest_framework_swagger.views import get_swagger_view
