@@ -111,9 +111,3 @@ class Stage(models.Model):
     class Meta:
         verbose_name = 'Этап'
         verbose_name_plural = 'Этапы'
-
-
-
-
-
-

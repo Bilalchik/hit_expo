@@ -8,5 +8,6 @@ urlpatterns = [
     path('partners/', PartnerView.as_view()),
     path('smi/', SMIView.as_view()),
     path('b2b/', B2BView.as_view()),
-    path('news/', NewsView.as_view())
+    path('news/', NewsView.as_view()),
+    path('news/<int:pk>/', NewsView.as_view())
 ]
