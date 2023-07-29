@@ -86,7 +86,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'main.wsgi.application'
 
-ASGI_APPLICATION = 'chat.routing.application'
+ASGI_APPLICATION = 'apps.chat.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -99,14 +99,14 @@ DATABASES = {
 }
 
 # DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'expo_db',
-#        'USER': 'hit_expo',
-#        'PASSWORD': 'expo_123',
-#        'HOST': 'pgdb',
-#        'PORT': '5432',
-#    }
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'expo_db',
+#         'USER': 'hit_expo',
+#         'PASSWORD': 'expo_123',
+#         'HOST': 'pgdb',
+#         'PORT': '5432',
+#     }
 # }
 
 
