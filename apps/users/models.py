@@ -41,11 +41,10 @@ class User(AbstractUser):
     def __str__(self):
         return self.email.__str__()
 
-    username = models.CharField(verbose_name='Имя / Компания', max_length= 300)
-    date_joined = models.DateTimeField(verbose_name='Дата Регистрация ', max_length= 300, blank=True , null=True)
-    # first_name = None
-    # last_name = None
-    # last_login = None
+    username = None
+    first_name = None
+    last_name = None
+    last_login = None
 
     ####################################.       PASSWORD    #################################
     user_type = models.PositiveSmallIntegerField(choices=UserType.choices, default=UserType.VISITOR, verbose_name="Тип пользователя")
@@ -75,7 +74,7 @@ class Participant(User):
         verbose_name_plural = "Пользователи УЧАСТНИКОВ"
 
     def __str__(self):
-        return self.email.__str__()
+        return self.company_one.__str__()
 
     company_one = models.CharField(verbose_name="Название компании", max_length=300, **parametersForNull)
     company_two = models.CharField(verbose_name="Юридическое название компании", max_length=300, **parametersForNull)
@@ -146,7 +145,7 @@ class UserSMI(User):
         verbose_name_plural = "Пользователи СМИ"
 
     def __str__(self):
-        return self.email.__str__()
+        return self.name_organization.__str__()
 
     image_certificate = models.ImageField(verbose_name="Загрузите вашего журналистского удостоверения в  png или jpg", upload_to='images/certificate-smi', **parametersForNull)
     image_logo = models.ImageField(verbose_name="Загрузите логотип компании в png или jpg", upload_to='images/logo-smi', **parametersForNull)
