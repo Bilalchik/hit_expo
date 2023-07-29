@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.investor',
     'apps.other',
     'apps.ticket',
+    'apps.b2b_meeting',
     # REST
     'rest_framework',
     'django_filters',
