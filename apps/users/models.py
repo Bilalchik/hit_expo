@@ -1,11 +1,12 @@
 import uuid, os
 
-from django.contrib.auth.models import AbstractUser
-from apps.users.managers import CustomManager
 from django.db import models
 from django.db.models import Q
 from django.shortcuts import render
-from .choices import Organization, Industry
+from django.contrib.auth.models import AbstractUser
+
+from apps.users.managers import CustomManager
+from apps.users.choices import Organization, Industry
 
 
 parametersForNull = {

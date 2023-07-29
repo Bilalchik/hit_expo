@@ -1,7 +1,6 @@
 import json
 
 from channels.generic.websocket import AsyncWebsocketConsumer
-from channels.db import database_sync_to_async
 
 from apps.chat.models import Message
 
@@ -12,26 +11,22 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def disconnect(self, close_code):
         pass
 
-    async def receive(self, text_data: dict):
-        data: dict = json.loads(text_data)
-        message: str = data.get('message')
-        file: bytes = data.get('file')
+    async def receive(self, text_data):
+        data = json.loads(text_data)
+        content = data['content']
+        author_id = data['author_id']  # Предполагается, что вы отправляете идентификатор автора из фронтенда
 
-        if file:
-            await self.save_file_to_message(file, message)
+        message = await self.create_message(author_id, content)
 
-        await self.save_message_to_db(message)
-        await self.send(text_data=json.dumps({
-            'message': message,
-            'file': file 
-        }))
+        await self.send(
+            text_data=json.dumps({
+                'author_id': message.author_id,
+                'content': message.content,
+                'timestamp': message.timestamp.strftime('%Y-%m-%d %H:%M:%S'),
+                'file_url': message.file.url if message.file else None,
+            })
+        )
 
-    @database_sync_to_async
-    def save_message_to_db(self, message):
-        author = self.scope['user']
-        Message.objects.create(author=author, content=message)
-
-    @database_sync_to_async
-    def save_file_to_message(self, file_data, message):
-        author = self.scope['user']
-        Message.objects.create(author=author, content=message, file=file_data)
+    async def create_message(self, author_id, content):
+        # Создаем и сохраняем сообщение в базе данных
+        return Message.objects.create(author_id=author_id, content=content)

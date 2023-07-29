@@ -1,4 +1,4 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 from apps.other.models import Expectation, Partner, SMI, B2B, News
 from apps.other.serializers import ExpectationSerializer, PartnerSerializer, SMISerializer, B2BSerializer, NewsSerializer
@@ -24,6 +24,6 @@ class B2BView(ListAPIView):
     serializer_class = B2BSerializer
 
 
-class NewsView(ListAPIView):
+class NewsView(ListAPIView, RetrieveAPIView):
     queryset = News.objects.all()
     serializer_class = NewsSerializer

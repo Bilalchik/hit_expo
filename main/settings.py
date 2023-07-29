@@ -25,6 +25,8 @@ SECRET_ADMIN_KEY = '12345'
 
 # Application definition
 INSTALLED_APPS = [
+    'channels',
+    'daphne',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,10 +39,12 @@ INSTALLED_APPS = [
     'apps.users.apps.UsersConfig',
     'apps.chat.apps.ChatConfig',
     'apps.feedback.apps.FeedbackConfig',
+    'apps.chat',
     'apps.main_page',
     'apps.investor',
     'apps.other',
     'apps.ticket',
+    'apps.b2b_meeting',
     'apps.fashion_zone',
     'apps.invest_zone',
     'apps.trade_zone',
@@ -52,7 +56,6 @@ INSTALLED_APPS = [
     # LIB
     'corsheaders',
     'drf_yasg',
-    'channels',
 ]
 
 MIDDLEWARE = [
@@ -86,8 +89,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'main.wsgi.application'
 
-ASGI_APPLICATION = 'chat.routing.application'
-
+ASGI_APPLICATION = 'apps.chat.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -100,14 +102,14 @@ ASGI_APPLICATION = 'chat.routing.application'
 # }
 
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': 'expo_db',
-       'USER': 'hit_expo',
-       'PASSWORD': 'expo_123',
-       'HOST': 'pgdb',
-       'PORT': '5432',
-   }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'expo_db',
+        'USER': 'hit_expo',
+        'PASSWORD': 'expo_123',
+        'HOST': 'pgdb',
+        'PORT': '5432',
+    }
 }
 
 
@@ -177,9 +179,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-django_heroku.settings(locals())
-
-
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
@@ -190,3 +189,5 @@ SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY,
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
+
+django_heroku.settings(locals())

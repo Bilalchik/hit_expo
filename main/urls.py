@@ -1,5 +1,5 @@
-from django.contrib import admin
 from django.urls import path, include
+from django.contrib import admin
 from django.conf.urls.static import static
 
 from rest_framework_swagger.views import get_swagger_view
@@ -31,6 +31,7 @@ urlpatterns = [
     path('trade_zone/', include('apps.trade_zone.urls')),
     path('invest_zone/', include('apps.invest_zone.urls')),
     path('fashion_zone/', include('apps.fashion_zone.urls')),
+    path('b2b_meeting/', include('apps.b2b_meeting.urls')),
 ]
 
 urlpatterns += doc_urls
