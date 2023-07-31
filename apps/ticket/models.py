@@ -17,6 +17,7 @@ class Ticket(models.Model):
         verbose_name = 'Билет'
         verbose_name_plural = 'Билеты'
 
+
 class Check(models.Model):
     chek_photo = models.ImageField('Фото чека', upload_to=get_upload_path, validators=[validate_file_extension], blank=True, null=True)
 

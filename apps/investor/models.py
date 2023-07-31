@@ -39,7 +39,6 @@ class Text(models.Model):
         verbose_name_plural = 'Описание'
 
 
-
 class Organizer(models.Model):
     
     class Meta: 
@@ -52,7 +51,6 @@ class Organizer(models.Model):
     url = models.URLField(verbose_name = 'Сайт', max_length=300 ,blank=True , null=True)
     text = models.TextField(verbose_name='Описание сайта')
     galary = models.ImageField(verbose_name='Фото Галерея ')
-    
 
 
 class Sponsors(models.Model):
