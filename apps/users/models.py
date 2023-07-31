@@ -5,8 +5,8 @@ from django.db.models import Q
 from django.shortcuts import render
 from django.contrib.auth.models import AbstractUser
 
-from apps.users.choices import Organization, Industry
 from apps.users.managers import CustomManager
+from apps.users.choices import Organization, Industry
 
 
 parametersForNull = {

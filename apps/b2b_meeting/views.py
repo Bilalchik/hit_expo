@@ -1,13 +1,14 @@
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView
-from django.shortcuts import get_object_or_404
 from django.db.models import Q
-from apps.b2b_meeting.models import Meeting
-from apps.b2b_meeting.serializers import (MeetingListSerializer, MeetingAnswerCreateSerializer, UserNameSerializer,
-                                          MeetingCreateSerializer)
+from django.shortcuts import get_object_or_404
+
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
 from apps.users.models import User
+from apps.b2b_meeting.models import Meeting
+from apps.b2b_meeting.serializers import (MeetingListSerializer, MeetingAnswerCreateSerializer, 
+                                            UserNameSerializer, MeetingCreateSerializer)
 
 
 class IncomingListView(APIView):
