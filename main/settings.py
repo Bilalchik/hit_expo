@@ -26,7 +26,6 @@ SECRET_ADMIN_KEY = '12345'
 # Application definition
 INSTALLED_APPS = [
     'channels',
-    'daphne',
     'jazzmin',
     'modeltranslation',
     'django.contrib.admin',
@@ -38,9 +37,7 @@ INSTALLED_APPS = [
     # APPS
     'apps.categories.apps.CategoriesConfig',
     'apps.users.apps.UsersConfig',
-    # 'apps.chat.apps.ChatConfig',
     'apps.feedback.apps.FeedbackConfig',
-    'apps.chat',
     'apps.main_page',
     'apps.investor',
     'apps.other',
@@ -91,7 +88,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'main.wsgi.application'
 
-ASGI_APPLICATION = 'apps.chat.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
