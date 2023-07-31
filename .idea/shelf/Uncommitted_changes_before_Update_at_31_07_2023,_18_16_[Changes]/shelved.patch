@@ -1,0 +1,193 @@
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1690805710853)
++++ b/.idea/vcs.xml	(date 1690805710853)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1690805710965)
++++ b/.idea/.gitignore	(date 1690805710965)
+@@ -0,0 +1,3 @@
++# Default ignored files
++/shelf/
++/workspace.xml
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1690805710840)
++++ b/.idea/misc.xml	(date 1690805710840)
+@@ -0,0 +1,4 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (hit_expo)" project-jdk-type="Python SDK" />
++</project>
+\ No newline at end of file
+Index: .idea/inspectionProfiles/profiles_settings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/inspectionProfiles/profiles_settings.xml b/.idea/inspectionProfiles/profiles_settings.xml
+new file mode 100644
+--- /dev/null	(date 1690805710847)
++++ b/.idea/inspectionProfiles/profiles_settings.xml	(date 1690805710847)
+@@ -0,0 +1,6 @@
++<component name="InspectionProjectProfileManager">
++  <settings>
++    <option name="USE_PROJECT_PROFILE" value="false" />
++    <version value="1.0" />
++  </settings>
++</component>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+--- /dev/null	(date 1690805710831)
++++ b/.idea/modules.xml	(date 1690805710831)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/hit_expo.iml" filepath="$PROJECT_DIR$/.idea/hit_expo.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/inspectionProfiles/Project_Default.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/inspectionProfiles/Project_Default.xml b/.idea/inspectionProfiles/Project_Default.xml
+new file mode 100644
+--- /dev/null	(date 1690805710724)
++++ b/.idea/inspectionProfiles/Project_Default.xml	(date 1690805710724)
+@@ -0,0 +1,72 @@
++<component name="InspectionProjectProfileManager">
++  <profile version="1.0">
++    <option name="myName" value="Project Default" />
++    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
++      <option name="ignoredPackages">
++        <value>
++          <list size="59">
++            <item index="0" class="java.lang.String" itemvalue="python-dateutil" />
++            <item index="1" class="java.lang.String" itemvalue="psycopg2" />
++            <item index="2" class="java.lang.String" itemvalue="defusedxml" />
++            <item index="3" class="java.lang.String" itemvalue="django-templated-mail" />
++            <item index="4" class="java.lang.String" itemvalue="MarkupSafe" />
++            <item index="5" class="java.lang.String" itemvalue="pycparser" />
++            <item index="6" class="java.lang.String" itemvalue="python-slugify" />
++            <item index="7" class="java.lang.String" itemvalue="coreschema" />
++            <item index="8" class="java.lang.String" itemvalue="djangorestframework-simplejwt" />
++            <item index="9" class="java.lang.String" itemvalue="certifi" />
++            <item index="10" class="java.lang.String" itemvalue="oauthlib" />
++            <item index="11" class="java.lang.String" itemvalue="pyparsing" />
++            <item index="12" class="java.lang.String" itemvalue="dj-database-url" />
++            <item index="13" class="java.lang.String" itemvalue="asgiref" />
++            <item index="14" class="java.lang.String" itemvalue="cryptography" />
++            <item index="15" class="java.lang.String" itemvalue="django-rest-swagger" />
++            <item index="16" class="java.lang.String" itemvalue="whitenoise" />
++            <item index="17" class="java.lang.String" itemvalue="gunicorn" />
++            <item index="18" class="java.lang.String" itemvalue="python3-openid" />
++            <item index="19" class="java.lang.String" itemvalue="simplejson" />
++            <item index="20" class="java.lang.String" itemvalue="django-filter" />
++            <item index="21" class="java.lang.String" itemvalue="charset-normalizer" />
++            <item index="22" class="java.lang.String" itemvalue="djoser" />
++            <item index="23" class="java.lang.String" itemvalue="openapi-codec" />
++            <item index="24" class="java.lang.String" itemvalue="idna" />
++            <item index="25" class="java.lang.String" itemvalue="PyJWT" />
++            <item index="26" class="java.lang.String" itemvalue="django-ckeditor" />
++            <item index="27" class="java.lang.String" itemvalue="django-heroku" />
++            <item index="28" class="java.lang.String" itemvalue="cffi" />
++            <item index="29" class="java.lang.String" itemvalue="requests" />
++            <item index="30" class="java.lang.String" itemvalue="drf-yasg" />
++            <item index="31" class="java.lang.String" itemvalue="Jinja2" />
++            <item index="32" class="java.lang.String" itemvalue="cloudinary" />
++            <item index="33" class="java.lang.String" itemvalue="sqlparse" />
++            <item index="34" class="java.lang.String" itemvalue="requests-oauthlib" />
++            <item index="35" class="java.lang.String" itemvalue="django-cloudinary-storage" />
++            <item index="36" class="java.lang.String" itemvalue="ruamel.yaml.clib" />
++            <item index="37" class="java.lang.String" itemvalue="heroku" />
++            <item index="38" class="java.lang.String" itemvalue="django-jazzmin" />
++            <item index="39" class="java.lang.String" itemvalue="urllib3" />
++            <item index="40" class="java.lang.String" itemvalue="djangorestframework" />
++            <item index="41" class="java.lang.String" itemvalue="django-cors-headers" />
++            <item index="42" class="java.lang.String" itemvalue="uritemplate" />
++            <item index="43" class="java.lang.String" itemvalue="six" />
++            <item index="44" class="java.lang.String" itemvalue="django-cleanup" />
++            <item index="45" class="java.lang.String" itemvalue="text-unidecode" />
++            <item index="46" class="java.lang.String" itemvalue="ruamel.yaml" />
++            <item index="47" class="java.lang.String" itemvalue="packaging" />
++            <item index="48" class="java.lang.String" itemvalue="social-auth-core" />
++            <item index="49" class="java.lang.String" itemvalue="coreapi" />
++            <item index="50" class="java.lang.String" itemvalue="django-location-field" />
++            <item index="51" class="java.lang.String" itemvalue="social-auth-app-django" />
++            <item index="52" class="java.lang.String" itemvalue="Django" />
++            <item index="53" class="java.lang.String" itemvalue="django-colorfield" />
++            <item index="54" class="java.lang.String" itemvalue="django-js-asset" />
++            <item index="55" class="java.lang.String" itemvalue="itypes" />
++            <item index="56" class="java.lang.String" itemvalue="pytz" />
++            <item index="57" class="java.lang.String" itemvalue="inflection" />
++            <item index="58" class="java.lang.String" itemvalue="Pillow" />
++          </list>
++        </value>
++      </option>
++    </inspection_tool>
++  </profile>
++</component>
+\ No newline at end of file
+Index: .idea/hit_expo.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/hit_expo.iml b/.idea/hit_expo.iml
+new file mode 100644
+--- /dev/null	(date 1690805710827)
++++ b/.idea/hit_expo.iml	(date 1690805710827)
+@@ -0,0 +1,18 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="PYTHON_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$">
++      <excludeFolder url="file://$MODULE_DIR$/env" />
++      <excludeFolder url="file://$MODULE_DIR$/venv" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++  <component name="PyDocumentationSettings">
++    <option name="format" value="PLAIN" />
++    <option name="myDocStringFormat" value="Plain" />
++  </component>
++  <component name="TestRunnerService">
++    <option name="PROJECT_TEST_RUNNER" value="py.test" />
++  </component>
++</module>
+\ No newline at end of file
