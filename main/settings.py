@@ -36,12 +36,7 @@ INSTALLED_APPS = [
     # APPS
     'apps.categories.apps.CategoriesConfig',
     'apps.users.apps.UsersConfig',
-<<<<<<< HEAD
-=======
-    # 'apps.chat.apps.ChatConfig',
     'apps.feedback.apps.FeedbackConfig',
-    'apps.chat',
->>>>>>> e61bf01c8894667e7e6c57d90f81dea2ca3520ea
     'apps.main_page',
     'apps.investor',
     'apps.other',
@@ -95,23 +90,23 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'expo_db',
-        'USER': 'hit_expo',
-        'PASSWORD': 'expo_123',
-        'HOST': 'pgdb',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'expo_db',
+#         'USER': 'hit_expo',
+#         'PASSWORD': 'expo_123',
+#         'HOST': 'pgdb',
+#         'PORT': '5432',
+#     }
+# }
 
 
 REST_FRAMEWORK = {
