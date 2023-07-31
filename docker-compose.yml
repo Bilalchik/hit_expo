@@ -5,7 +5,7 @@ services:
   web:
       build: .
       restart: always
-      command: sh -c "python manage.py collectstatic --no-input && python manage.py migrate && gunicorn -w 7 -b 0.0.0.0:8000 main.wsgi --reload && daphne main.asgi:application"
+      command: sh -c "python manage.py collectstatic --no-input && python manage.py migrate && gunicorn -w 7 -b 0.0.0.0:8000 main.wsgi --reload"
       volumes:
           - .:/app
           - ./media:/app/media/
