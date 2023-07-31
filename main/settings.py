@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'channels',
     'daphne',
     'jazzmin',
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -62,6 +63,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware', #CORS
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -158,6 +160,12 @@ TIME_ZONE = "Asia/Bishkek"
 USE_I18N = True
 
 USE_TZ = True
+
+gettext = lambda s: s
+LANGUAGES = (
+    ('ru', gettext('Russian')),
+    ('en', gettext('English')),
+)
 
 # CORS
 CORS_ALLOW_ALL_ORIGINS = True
