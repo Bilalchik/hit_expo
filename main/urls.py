@@ -1,6 +1,8 @@
 from django.urls import path, include
 from django.contrib import admin
 from django.conf.urls.static import static
+from django.conf.urls.i18n import i18n_patterns
+
 
 from rest_framework_swagger.views import get_swagger_view
 from rest_framework_simplejwt.views import (
@@ -21,6 +23,7 @@ urlpatterns = [
     path('api/token/access/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('i18n/', include('django.conf.urls.i18n')),
     # APPS
     path('user/', include('apps.users.urls')),
     path('main_page/', include('apps.main_page.urls')),
@@ -32,7 +35,20 @@ urlpatterns = [
     path('food_zone/', include('apps.food_zone.urls')),
     path('fashion_zone/', include('apps.fashion_zone.urls')),
     path('b2b_meeting/', include('apps.b2b_meeting.urls')),
+    path('tickets/', include('apps.ticket.urls')),
 ]
+
+urlpatterns += i18n_patterns(
+    path('user/', include('apps.users.urls')),
+    path('main_page/', include('apps.main_page.urls')),
+    path('investor/', include('apps.investor.urls')),
+    path('feedback/', include('apps.feedback.urls')),
+    path('other/', include('apps.other.urls')),
+    path('trade_zone/', include('apps.trade_zone.urls')),
+    path('invest_zone/', include('apps.invest_zone.urls')),
+    path('fashion_zone/', include('apps.fashion_zone.urls')),
+    path('b2b_meeting/', include('apps.b2b_meeting.urls')),
+)
 
 urlpatterns += doc_urls
 if settings.DEBUG:
