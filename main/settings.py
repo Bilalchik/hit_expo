@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # APPS
     'apps.categories.apps.CategoriesConfig',
+    'apps.food_zone.apps.FoodZoneConfig',
     'apps.users.apps.UsersConfig',
     'apps.feedback.apps.FeedbackConfig',
     'apps.main_page',
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'apps.b2b_meeting',
     'apps.fashion_zone',
     'apps.invest_zone',
+    # 'apps.food_zone',
     'apps.trade_zone',
     'apps.profile_visit',
     # REST
@@ -93,23 +95,23 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'expo_db',
-#         'USER': 'hit_expo',
-#         'PASSWORD': 'expo_123',
-#         'HOST': 'pgdb',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'expo_db',
+        'USER': 'hit_expo',
+        'PASSWORD': 'expo_123',
+        'HOST': 'pgdb',
+        'PORT': '5432',
+    }
+}
 
 
 REST_FRAMEWORK = {
