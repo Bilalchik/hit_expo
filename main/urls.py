@@ -35,6 +35,7 @@ urlpatterns = [
     path('fashion_zone/', include('apps.fashion_zone.urls')),
     path('b2b_meeting/', include('apps.b2b_meeting.urls')),
     path('tickets/', include('apps.ticket.urls')),
+    path('profile_visit/', include('apps.profile_visit.urls')),
 ]
 
 urlpatterns += i18n_patterns(
