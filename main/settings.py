@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # APPS
     'apps.categories.apps.CategoriesConfig',
+    'apps.food_zone.apps.FoodZoneConfig',
     'apps.users.apps.UsersConfig',
     'apps.feedback.apps.FeedbackConfig',
     'apps.main_page',
@@ -45,7 +46,9 @@ INSTALLED_APPS = [
     'apps.b2b_meeting',
     'apps.fashion_zone',
     'apps.invest_zone',
+    # 'apps.food_zone',
     'apps.trade_zone',
+    'apps.profile_visit',
     # REST
     'rest_framework',
     'django_filters',

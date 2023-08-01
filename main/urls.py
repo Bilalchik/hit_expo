@@ -32,9 +32,11 @@ urlpatterns = [
     path('other/', include('apps.other.urls')),
     path('trade_zone/', include('apps.trade_zone.urls')),
     path('invest_zone/', include('apps.invest_zone.urls')),
+    path('food_zone/', include('apps.food_zone.urls')),
     path('fashion_zone/', include('apps.fashion_zone.urls')),
     path('b2b_meeting/', include('apps.b2b_meeting.urls')),
     path('tickets/', include('apps.ticket.urls')),
+    path('profile_visit/', include('apps.profile_visit.urls')),
 ]
 
 urlpatterns += i18n_patterns(
