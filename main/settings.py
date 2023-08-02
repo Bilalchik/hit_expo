@@ -199,3 +199,15 @@ SIMPLE_JWT = {
 }
 
 django_heroku.settings(locals())
+
+
+# settings.py
+
+# Настройки для отправки электронных писем через Gmail с использованием специального пароля
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'Info@hit-expo.org'
+EMAIL_HOST_PASSWORD = 'qhzefzlsrupvhxfg'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
