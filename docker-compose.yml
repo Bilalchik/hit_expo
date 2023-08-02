@@ -36,6 +36,7 @@ services:
           - PUID=1000
           - PGID=1000
           - TZ=Asia/Bishkek
+          - URL=143.110.188.124:8000
           - SUBDOMAINS=api
           - VALIDATION=http
           - ONLY_SUBDOMAINS=true
