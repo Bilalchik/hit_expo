@@ -20,7 +20,6 @@ ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = "users.User"
 
-
 SECRET_ADMIN_KEY = '12345'
 
 # Application definition
@@ -46,6 +45,8 @@ INSTALLED_APPS = [
     'apps.fashion_zone',
     'apps.invest_zone',
     'apps.trade_zone',
+
+    'apps.chat',
     # REST
     'rest_framework',
     'django_filters',
@@ -57,6 +58,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # 'channels.middleware.BaseMiddleware',
     'corsheaders.middleware.CorsMiddleware', #CORS
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -88,6 +90,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'main.wsgi.application'
 
+ASGI_APPLICATION = 'main.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
