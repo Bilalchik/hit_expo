@@ -51,6 +51,8 @@ class User(AbstractUser):
     uniqueId = models.UUIDField(unique=True, verbose_name="Уникальный id", **parametersForNull)
     email = models.EmailField(max_length=200, verbose_name="Email", unique=True)
 
+    user_bool = models.BooleanField(verbose_name="Разрешение на редактирование", default=False)
+
     resetPasswordUUID = models.UUIDField(verbose_name="Ссылка для восстановления пароля", **parametersForNull)
     resetPasswordDate = models.BigIntegerField(verbose_name="Время восстановления пароля", **parametersForNull)
 

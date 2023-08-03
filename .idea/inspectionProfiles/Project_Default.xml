@@ -5,6 +5,7 @@
       <option name="ignoredErrors">
         <list>
           <option value="W292" />
+          <option value="E265" />
         </list>
       </option>
     </inspection_tool>
@@ -39,6 +40,7 @@
           <option value="apps.b2b_meeting.views.MeetingCreateView.save" />
           <option value="apps.b2b_meeting.views.MeetingCreateView.data" />
           <option value="apps.b2b_meeting.views.MeetingCreateView.errors" />
+          <option value="apps.profile_visit.models.Visit.objects" />
         </list>
       </option>
     </inspection_tool>

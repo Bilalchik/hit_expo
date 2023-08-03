@@ -20,7 +20,6 @@ ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = "users.User"
 
-
 SECRET_ADMIN_KEY = '12345'
 
 # Application definition
@@ -60,6 +59,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # 'channels.middleware.BaseMiddleware',
     'corsheaders.middleware.CorsMiddleware', #CORS
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -91,27 +91,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'main.wsgi.application'
 
+ASGI_APPLICATION = 'main.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'expo_db',
-        'USER': 'hit_expo',
-        'PASSWORD': 'expo_123',
-        'HOST': 'pgdb',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'expo_db',
+#         'USER': 'hit_expo',
+#         'PASSWORD': 'expo_123',
+#         'HOST': 'pgdb',
+#         'PORT': '5432',
+#     }
+# }
 
 
 REST_FRAMEWORK = {
