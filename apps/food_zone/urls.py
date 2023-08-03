@@ -3,5 +3,5 @@ from . import views
 
 
 urlpatterns = [
-    path('food_zone_list/', views.FoodZoneDeleteView.as_view())
+    path('food_zone_list/', views.FoodZoneCreateListView.as_view())
 ]
