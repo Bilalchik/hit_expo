@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'apps.food_zone.apps.FoodZoneConfig',
     'apps.users.apps.UsersConfig',
     'apps.feedback.apps.FeedbackConfig',
+    'apps.chat',
     'apps.main_page',
     'apps.investor',
     'apps.other',
@@ -45,7 +46,6 @@ INSTALLED_APPS = [
     'apps.b2b_meeting',
     'apps.fashion_zone',
     'apps.invest_zone',
-    # 'apps.food_zone',
     'apps.trade_zone',
     'apps.profile_visit',
     # REST
@@ -59,7 +59,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # 'channels.middleware.BaseMiddleware',
     'corsheaders.middleware.CorsMiddleware', #CORS
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -96,23 +95,23 @@ ASGI_APPLICATION = 'main.routing.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'expo_db',
-#         'USER': 'hit_expo',
-#         'PASSWORD': 'expo_123',
-#         'HOST': 'pgdb',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'expo_db',
+        'USER': 'hit_expo',
+        'PASSWORD': 'expo_123',
+        'HOST': 'pgdb',
+        'PORT': '5432',
+    }
+}
 
 
 REST_FRAMEWORK = {
@@ -199,3 +198,15 @@ SIMPLE_JWT = {
 }
 
 django_heroku.settings(locals())
+
+
+# settings.py
+
+# Настройки для отправки электронных писем через Gmail с использованием специального пароля
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'Info@hit-expo.org'
+EMAIL_HOST_PASSWORD = 'qhzefzlsrupvhxfg'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
