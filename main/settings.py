@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'apps.food_zone.apps.FoodZoneConfig',
     'apps.users.apps.UsersConfig',
     'apps.feedback.apps.FeedbackConfig',
+    'apps.chat',
     'apps.main_page',
     'apps.investor',
     'apps.other',
@@ -45,7 +46,6 @@ INSTALLED_APPS = [
     'apps.b2b_meeting',
     'apps.fashion_zone',
     'apps.invest_zone',
-    # 'apps.food_zone',
     'apps.trade_zone',
     'apps.profile_visit',
     # REST
@@ -59,7 +59,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # 'channels.middleware.BaseMiddleware',
     'corsheaders.middleware.CorsMiddleware', #CORS
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

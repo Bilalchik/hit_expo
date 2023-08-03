@@ -1,12 +1,7 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from django.shortcuts import render
 from rest_framework import generics
 
+from apps.food_zone.models import Advantage, FoodZone, Terms, ParticipationSteps
 from apps.food_zone.serializers import AdvantageListSerializer,FoodZoneListSerializer, TermsListSerializer, ParticipationStepsListSerializer
-
-from rest_framework.generics import ListCreateAPIView, DestroyAPIView
-from .models import Advantage, FoodZone, Terms, ParticipationSteps
 
 
 #######   Преимущества для участников

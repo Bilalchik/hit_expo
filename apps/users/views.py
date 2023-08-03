@@ -57,9 +57,9 @@ class UserSMIViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
-        user_smi = request.user_smi
-        data = request.data.dict()
-        serializer = UserSMISerializer(user_smi, data=data, context={'request': request})
+        unique_id = kwargs['uniqueId']
+        user_smi = UserSMI.objects.get(uniqueId=unique_id)
+        serializer = UserSMISerializer(user_smi, data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
@@ -80,9 +80,9 @@ class ExpertViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
-        expert = request.expert
-        data = request.data.dict()
-        serializer = ExpertSerializer(expert, data=data, context={'request': request})
+        unique_id = kwargs['uniqueId']
+        expert = Expert.objects.get(uniqueId=unique_id)
+        serializer = ExpertSerializer(expert, data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
@@ -103,9 +103,9 @@ class VisitorViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
-        visitor = request.visitor
-        data = request.data.dict()
-        serializer = VisitorSerializer(visitor, data=data, context={'request': request})
+        unique_id = kwargs['uniqueId']
+        visitor = Visitor.objects.get(uniqueId=unique_id)
+        serializer = VisitorSerializer(visitor, data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
@@ -126,9 +126,9 @@ class GosUserViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
-        gos_user = request.gos_user
-        data = request.data.dict()
-        serializer = GosUserSerializer(gos_user, data=data, context={'request': request})
+        unique_id = kwargs['uniqueId']
+        gos_user = GosUser.objects.get(uniqueId=unique_id)
+        serializer = GosUserSerializer(gos_user, data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
@@ -149,9 +149,9 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
-        participant = request.participant
-        data = request.data.dict()
-        serializer = ParticipantSerializer(participant, data=data, context={'request': request})
+        unique_id = kwargs['uniqueId']
+        participant = Participant.objects.get(uniqueId=unique_id)
+        serializer = ParticipantSerializer(participant, data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
