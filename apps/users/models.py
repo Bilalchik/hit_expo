@@ -46,6 +46,7 @@ class User(AbstractUser):
     last_name = None
     last_login = None
 
+
     ####################################.       PASSWORD    #################################
     user_type = models.PositiveSmallIntegerField(choices=UserType.choices, default=UserType.VISITOR, verbose_name="Тип пользователя")
     uniqueId = models.UUIDField(unique=True, verbose_name="Уникальный id", **parametersForNull)
