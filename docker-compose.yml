@@ -49,7 +49,7 @@ services:
       volumes:
           - ./nginx/nginx.conf:/config/nginx/conf.d
           - ./media:/usr/media/
-          - lets:/config/keys/
+          # - lets:/config/keys/
           - ./static:/usr/static/
 
 volumes:
