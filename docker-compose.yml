@@ -37,7 +37,6 @@ services:
           - PGID=1000
           - TZ=Asia/Bishkek
           - URL=tmsns.ru
-          - SUBDOMAINS=api
           - VALIDATION=http
           - ONLY_SUBDOMAINS=true
           - STAGING=false
