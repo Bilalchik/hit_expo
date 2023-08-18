@@ -1,4 +1,3 @@
-
 version: "2.2"
 
 services:
@@ -30,13 +29,12 @@ services:
 
   nginx:
       image: linuxserver/swag
-#      image: nginx:latest
       restart: always
       environment:
-          - PUID=1000
-          - PGID=1000
-          - TZ=Asia/Bishkek
-          - URL=tmsns.ru
+          - PUID=1000  # Ваш PUID
+          - PGID=1000  # Ваш PGID
+          - TZ=Asia/Bishkek  # Ваша временная зона
+          - URL=tmsns.ru  # Ваш URL (домен)
           - VALIDATION=http
           - ONLY_SUBDOMAINS=true
           - STAGING=false
@@ -46,7 +44,7 @@ services:
           - "80:80"
           - "443:443"
       volumes:
-          - ./nginx/nginx.conf:/config/nginx/conf.d
+          - ./nginx/nginx.conf:/config/nginx/site-confs/default
           - ./media:/usr/media/
           - lets:/config/keys/
           - ./static:/usr/static/
