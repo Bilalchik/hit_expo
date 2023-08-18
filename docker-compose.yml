@@ -9,10 +9,8 @@ services:
       - .:/app
       - ./media:/app/media/
       - ./static:/app/static/
-    ports:
-      - "8000:8000"
-    depends_on:
-      - pgdb
+    expose:
+      - "8000"
 
   pgdb:
     image: postgres:latest
@@ -27,28 +25,15 @@ services:
       - POSTGRES_PASSWORD=expo_123
       - PORT=5432
 
-  swag:
-    image: linuxserver/swag
+  nginx:
+    image: nginx:latest
     restart: always
-    environment:
-      - PUID=1000  # Ваш PUID
-      - PGID=1000  # Ваш PGID
-      - TZ=Asia/Bishkek  # Ваша временная зона
-      - URL=tmsns.ru  # Ваш URL (домен)
-      - VALIDATION=http
-      - ONLY_SUBDOMAINS=true
-      - STAGING=false
     ports:
       - "80:80"
-      - "443:443"
     volumes:
-      - ./swag/config:/config
-      - ./media:/usr/media/
-      - lets:/config/keys/
-      - ./static:/usr/static/
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf  # Путь к конфигурационному файлу Nginx
     depends_on:
       - web
 
 volumes:
   postgres_data:
-  lets:
