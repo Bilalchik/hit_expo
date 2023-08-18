@@ -1,18 +1,18 @@
-version: "2.2"
+version: "3.8"
 
 services:
   web:
-      build: .
-      restart: always
-      command: sh -c "python manage.py collectstatic --no-input && python manage.py migrate && gunicorn -w 7 -b 0.0.0.0:8000 main.wsgi --reload && daphne main.asgi:application"
-      volumes:
-          - .:/app
-          - ./media:/app/media/
-          - ./static:/app/static/
-      ports:
-          - "8000:8000"
-      depends_on:
-          - pgdb
+    build: .
+    restart: always
+    command: sh -c "python manage.py collectstatic --no-input && python manage.py migrate && gunicorn -w 7 -b 0.0.0.0:8000 main.wsgi --reload && daphne main.asgi:application"
+    volumes:
+      - .:/app
+      - ./media:/app/media/
+      - ./static:/app/static/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - pgdb
 
   pgdb:
     image: postgres:latest
@@ -20,34 +20,34 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-          - "5432:5432"
+      - "5432:5432"
     environment:
       - POSTGRES_DB=expo_db
       - POSTGRES_USER=hit_expo
       - POSTGRES_PASSWORD=expo_123
       - PORT=5432
 
-  nginx:
-      image: linuxserver/swag
-      restart: always
-      environment:
-          - PUID=1000  # Ваш PUID
-          - PGID=1000  # Ваш PGID
-          - TZ=Asia/Bishkek  # Ваша временная зона
-          - URL=tmsns.ru  # Ваш URL (домен)
-          - VALIDATION=http
-          - ONLY_SUBDOMAINS=true
-          - STAGING=false
-      depends_on:
-          - web
-      ports:
-          - "80:80"
-          - "443:443"
-      volumes:
-          - ./nginx/nginx.conf:/config/nginx/site-confs/default
-          - ./media:/usr/media/
-          - lets:/config/keys/
-          - ./static:/usr/static/
+  swag:
+    image: linuxserver/swag
+    restart: always
+    environment:
+      - PUID=1000  # Ваш PUID
+      - PGID=1000  # Ваш PGID
+      - TZ=Asia/Bishkek  # Ваша временная зона
+      - URL=tmsns.ru  # Ваш URL (домен)
+      - VALIDATION=http
+      - ONLY_SUBDOMAINS=true
+      - STAGING=false
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./swag/config:/config
+      - ./media:/usr/media/
+      - lets:/config/keys/
+      - ./static:/usr/static/
+    depends_on:
+      - web
 
 volumes:
   postgres_data:
