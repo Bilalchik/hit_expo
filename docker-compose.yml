@@ -1,4 +1,4 @@
-version: "2.2"
+version: "3.8"
 
 services:
   web:
@@ -19,22 +19,22 @@ services:
     container_name: pgdb
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-          - "5432:5432"
     environment:
       - POSTGRES_DB=expo_db
       - POSTGRES_USER=hit_expo
       - POSTGRES_PASSWORD=expo_123
       - PORT=5432
 
+
   nginx:
       image: linuxserver/swag
+      #      image: nginx:latest
       restart: always
       environment:
-          - PUID=1000  # Ваш PUID
-          - PGID=1000  # Ваш PGID
-          - TZ=Asia/Bishkek  # Ваша временная зона
-          - URL=tmsns.ru  # Ваш URL (домен)
+          - PUID=1000
+          - PGID=1000
+          - TZ=Asia/Bishkek
+          - URL=tmsns.ru
           - VALIDATION=http
           - ONLY_SUBDOMAINS=true
           - STAGING=false
