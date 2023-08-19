@@ -44,7 +44,7 @@ services:
           - "80:80"
           - "443:443"
       volumes:
-          - ./nginx/nginx.conf:/config/nginx/site-confs/default
+          - ./nginx/nginx.conf:/config/nginx/site-confs/default.conf
           - ./media:/usr/media/
           - lets:/config/keys/
           - ./static:/usr/static/
