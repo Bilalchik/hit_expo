@@ -1,17 +1,38 @@
-from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 
-from apps.ticket.models import Ticket, Check
-from apps.ticket.serializers import TicketSerializer, CheckSerializer
-from apps.ticket.permissions import TicketPermission
-
-
-class TicketView(generics.ListAPIView, generics.RetrieveAPIView, generics.CreateAPIView):
-    queryset = Ticket.objects.all()
-    serializer_class = TicketSerializer
-    permission_classes = (TicketPermission,)
+from apps.ticket.models import Industry, Stand, Ticket
+from apps.ticket.serializers import IndustryListSerializer, TicketCreateSerializer, StandListSerializer
 
 
-class CheckView(generics.ListAPIView, generics.RetrieveAPIView, generics.CreateAPIView):
-    queryset = Check.objects.all()
-    serializer_class = CheckSerializer
-    permission_classes = (TicketPermission,)
+class TicketCreateView(APIView):
+
+    def get(self, request):
+
+        industry = Industry.objects.all()
+        stands = Stand.objects.all()
+
+        industry_serializer = IndustryListSerializer(industry, many=True)
+        stands_serializer = StandListSerializer(stands, many=True)
+
+        all_data = {
+            'stands': stands_serializer.data,
+            'industry': industry_serializer.data
+        }
+
+        return Response(all_data)
+
+    def post(self, request, format=None):
+        serializer = TicketCreateSerializer(data=request.data, context={'request': request})
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
