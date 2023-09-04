@@ -1,5 +1,29 @@
 version: '3'
 services:
+  web:
+    build: .
+    restart: always
+    command: sh -c "python manage.py collectstatic --no-input && python manage.py migrate && gunicorn -w 7 -b 0.0.0.0:8000 main.wsgi --reload && daphne main.asgi:application"
+    volumes:
+      - .:/app
+      - ./media:/app/media/
+      - ./static:/app/static/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - pgdb
+
+  pgdb:
+    image: postgres:latest
+    container_name: pgdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=expo_db
+      - POSTGRES_USER=hit_expo
+      - POSTGRES_PASSWORD=expo_123
+      - PORT=5432
+
   nginx:
     image: nginx:1.15-alpine
     ports:
@@ -9,8 +33,11 @@ services:
       - ./data/nginx:/etc/nginx/conf.d
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
   certbot:
     image: certbot/certbot
     volumes:
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
