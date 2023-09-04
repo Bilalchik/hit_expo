@@ -2,17 +2,17 @@ version: "3.8"
 
 services:
   web:
-      build: .
-      restart: always
-      command: sh -c "python manage.py collectstatic --no-input && python manage.py migrate && gunicorn -w 7 -b 0.0.0.0:8000 main.wsgi --reload && daphne main.asgi:application"
-      volumes:
-          - .:/app
-          - ./media:/app/media/
-          - ./static:/app/static/
-      ports:
-          - "8000:8000"
-      depends_on:
-          - pgdb
+    build: .
+    restart: always
+    command: sh -c "python manage.py collectstatic --no-input && python manage.py migrate && gunicorn -w 7 -b 0.0.0.0:8000 main.wsgi --reload && daphne main.asgi:application"
+    volumes:
+      - .:/app
+      - ./media:/app/media/
+      - ./static:/app/static/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - pgdb
 
   pgdb:
     image: postgres:latest
@@ -26,27 +26,16 @@ services:
       - PORT=5432
 
   nginx:
-      image: linuxserver/swag
-      #      image: nginx:latest
-      restart: always
-      environment:
-          - PUID=1000
-          - PGID=1000
-          - TZ=Asia/Bishkek
-          - URL=tmsns.ru
-          - VALIDATION=http
-          - ONLY_SUBDOMAINS=true
-          - STAGING=false
-      depends_on:
-          - web
-      ports:
-          - "80:80"
-          - "443:443"
-      volumes:
-          - ./nginx/nginx.conf:/config/nginx/site-confs/default.conf
-          - ./media:/usr/media/
-          - lets:/config/keys/
-          - ./static:/usr/static/
+    image: nginx:latest
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./lets:/etc/letsencrypt
+      - ./media:/usr/share/nginx/html/media
+      - ./static:/usr/share/nginx/html/static
 
 volumes:
   postgres_data:
