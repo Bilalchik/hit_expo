@@ -1,5 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 from rest_framework import status
 from rest_framework.views import APIView
@@ -19,6 +21,13 @@ class IncomingListView(APIView):
 
         return Response(serializer.data)
 
+    @swagger_auto_schema(request_body=openapi.Schema(
+        type="object",
+        properties={
+            "id": openapi.Schema(type="integer", example="1"),
+            "answer": openapi.Schema(type="boolean", example=False),
+        }
+    ))
     def put(self, request):
         meeting_id = request.data.get('id')
         meeting = get_object_or_404(Meeting, id=meeting_id, invited=request.user)
@@ -53,6 +62,16 @@ class MeetingCreateView(APIView):
 
         return Response(all_data)
 
+    @swagger_auto_schema(request_body=openapi.Schema(
+        type="object",
+        properties={
+            "inviter": openapi.Schema(type="integer", example="1"),
+            "invited": openapi.Schema(type="integer", example="2"),
+            "start": openapi.Schema(type="string", example='2023-09-12T16:00:00.142783+06:00'),
+            "end": openapi.Schema(type="string", example='2023-09-12T18:00:00.142783+06:00'),
+            "description": openapi.Schema(type="string", example="Я вызываю тебя на B2B встречу"),
+        }
+    ))
     def post(self, request, pk):
         # Получаем объект пользователя на основе pk из URL
         invited_user = get_object_or_404(User, id=pk)
@@ -75,6 +94,12 @@ class SentListView(APIView):
 
         return Response(serializer.data)
 
+    @swagger_auto_schema(request_body=openapi.Schema(
+        type="object",
+        properties={
+            "id": openapi.Schema(type="integer", example="1"),
+        }
+    ))
     def put(self, request):
         meeting_id = request.data.get('id')
         meeting = get_object_or_404(Meeting, id=meeting_id)
@@ -90,6 +115,13 @@ class AppointedListView(APIView):
 
         return Response(serializer.data)
 
+    @swagger_auto_schema(request_body=openapi.Schema(
+        type="object",
+        properties={
+            "id": openapi.Schema(type="integer", example="1"),
+            "answer": openapi.Schema(type="boolean", example=False),
+        }
+    ))
     def put(self, request):
         meeting_id = request.data.get('id')
         meeting = get_object_or_404(Meeting, Q(invited=request.user.id) | Q(inviter=request.user.id), status=4, id=meeting_id)

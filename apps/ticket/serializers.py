@@ -41,3 +41,9 @@ class TicketCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Это место уже занято.")
 
         return data
+
+
+class TicketListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
+        fields = '__all__'
